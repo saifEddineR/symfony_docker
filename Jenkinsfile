@@ -9,13 +9,14 @@ pipeline{
         stage('build'){
             steps{
                  script{
-                    app = docker.build("saifromdhane/sf_gomycode")
-                    docker.withRegistry('', 'docker_credentials') {
-                        app.push("${BUILD_NUMBER}")
-                        app.push("${GIT_COMMIT}")
-                        app.push("latest")
-                    }
-                }
+                    echo "hello"
+                    dockerImage = docker.build("saifromdhane/sf_gomycode")
+                    echo "hello1"
+                    docker.withRegistry( '', "docker_credentials" ) {
+                        echo "hello2"
+                        dockerImage.push("$BUILD_NUMBER")
+                     }
+                 }
             }
         }
         stage('deliver'){
