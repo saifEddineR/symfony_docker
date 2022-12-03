@@ -9,6 +9,7 @@ pipeline{
         stage('build'){
             steps{
                  script{
+                    cd app/
                     app = docker.build("saifromdhane/sf_gomycode")
                     docker.withRegistry('', 'docker_credentials') {
                         app.push("${BUILD_NUMBER}")
